@@ -23,7 +23,27 @@ function Landing() {
           <Button className="rounded-full mt-[30px] px-[60px] py-[15px] w-full md:w-[200px] capitalize text-[15px] bg-black">
             Shop Now
           </Button>
+          {/*  //* Number Section */}
+          <div className="pt-[30px] mb-2 md:pt-[70px] pb-[10px] grid grid-cols-1 md:grid-cols-3 justify-between w-full lg:w-[50%] gap-4 md:gap-0 font-[ubuntu] text-center md:text-start">
+            <div className="border-b-2 md:border-r-2 border-gray-600 w-full px-6 pb-4 md:pb-0 md:border-b-0">
+              <h3 className="font-bold text-[30px]">200+</h3>
+              <p className="font-[ubuntu] text-gray-600">
+                International Brands
+              </p>
+            </div>
+            <div className="border-b-2 md:border-r-2 border-gray-600 w-full px-6 pb-4 md:pb-0 md:border-b-0">
+              <h3 className="font-bold text-[30px]">2,000+</h3>
+              <p className="font-[ubuntu] text-gray-600">
+                High-Quality Products
+              </p>
+            </div>
+            <div className="w-full px-6">
+              <h3 className="font-bold text-[30px]">30,000+</h3>
+              <p className="font-[ubuntu] text-gray-600">Happy Customers</p>
+            </div>
+          </div>
         </div>
+
         <img
           src={landing}
           alt="Landing"
@@ -31,7 +51,7 @@ function Landing() {
         />
       </div>
       {/* //* Brand Section */}
-      <div className="bg-black h-[15vh] z-10 ">
+      <div className="bg-black min-h-[100px] z-10 ">
         <div className="container flex flex-wrap justify-between md:flex-nowrap w-full h-full flex-shrink-0 ">
           <div className="md:h-full items-center grid grid-cols-3 gap-4 md:w-[60%]">
             <img src={versace} alt="Versace" className="object-contain" />
