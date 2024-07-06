@@ -4,6 +4,7 @@ import zara from "@assets/svg/b2Vector.svg";
 import gucci from "@assets/svg/b3Vector.svg";
 import prada from "@assets/svg/b4Vector.svg";
 import calvin from "@assets/svg/b5Vector.svg";
+import star from "@assets/svg/Vector.svg"
 import { Button } from "@material-tailwind/react";
 
 function Landing() {
@@ -43,10 +44,20 @@ function Landing() {
             </div>
           </div>
         </div>
+        <img 
+        src={star}
+        alt="star"
+        className="absolute hidden lg:block lg:top-[200px] lg:right-[100px] w-[70px] z-10"
+        />
         <img
           src={landing}
           alt="Landing"
           className="absolute hidden lg:block lg:top-[134px] lg:right-[111px] right-0 h-[663px] z-0 "
+        />
+        <img 
+        src={star}
+        alt="star"
+        className="absolute hidden lg:block lg:top-[350px] lg:right-[500px] w-[50px] z-10"
         />
       </div>
       {/* //* Brand Section */}
