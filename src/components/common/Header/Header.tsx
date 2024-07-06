@@ -9,7 +9,7 @@ function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <section className="fixed w-full">
+    <section className="fixed w-full bg-white z-50">
       {display && (
         <div className="bg-black text-white text-center text-xs font-[cairo] font-normal py-[5px] relative flex items-center">
           <div className="w-full container">
@@ -42,7 +42,7 @@ function Header() {
         <ul
           className={`${menuOpen ? "flex" : "hidden"} ${
             display ? "top-16" : "top-10"
-          } z-10 flex-col md:flex-row md:flex items-center w-full md:w-[40%] lg:w-[30%] font-[ubuntu] absolute md:relative bg-black md:bg-transparent text-white md:text-black md:top-auto left-0 md:left-auto mt-5 md:mt-0`}
+          } z-30 flex-col md:flex-row md:flex items-center w-full md:w-[40%] lg:w-[30%] font-[ubuntu] absolute md:relative bg-black md:bg-transparent text-white md:text-black md:top-auto left-0 md:left-auto mt-5 md:mt-0`}
         >
           <li className="flex justify-center py-2 border-b-2 border-gray-50 w-full md:border-none">
             Shop
@@ -83,7 +83,7 @@ function Header() {
         <div
           className={`${
             display ? "top-18" : "top-16"
-          } absolute  left-0 w-full bg-white p-4 md:hidden`}
+          } absolute  left-0 w-full bg-white p-4 md:hidden z-30`}
         >
           <input
             type="text"

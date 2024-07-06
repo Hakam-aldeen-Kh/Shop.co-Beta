@@ -1,9 +1,10 @@
-import { Header } from "@components/index";
+import { Header, Landing } from "@components/index";
 
 function Home() {
   return (
     <div>
       <Header />
+      <Landing/>
     </div>
   );
 }
