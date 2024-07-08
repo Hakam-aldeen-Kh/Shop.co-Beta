@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Basket from "@assets/svg/Basket.svg";
 import User from "@assets/svg/User.svg";
 import DownArrow from "@assets/svg/DownArrow.svg";
@@ -7,9 +7,31 @@ function Header() {
   const [display, setDisplay] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [hasShadow, setHasShadow] = useState(false);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setHasShadow(true);
+      } else {
+        setHasShadow(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <section className="fixed w-full bg-white z-50">
+    <section
+      ref={headerRef}
+      className={`fixed w-full bg-white z-50 top-0 transition-shadow duration-300 ${
+        hasShadow ? "shadow-md" : ""
+      }`}
+    >
       {display && (
         <div className="bg-black text-white text-center text-xs font-[cairo] font-normal py-[5px] relative flex items-center">
           <div className="w-full container">
@@ -74,7 +96,11 @@ function Header() {
             ></i>
           </div>
           <div className="flex items-center">
-            <img src={Basket} alt="Basket Icon" className="w-[25px] mr-4" />
+            <img
+              src={Basket}
+              alt="Basket Icon"
+              className="w-[25px] mr-4 md:mx-6"
+            />
             <img src={User} alt="User Icon" className="w-[25px]" />
           </div>
         </div>
