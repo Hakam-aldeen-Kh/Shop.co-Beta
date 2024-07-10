@@ -1,4 +1,8 @@
-import { BackgroundSection, BrandsSection } from "@components/sections";
+import {
+  BackgroundSection,
+  BrandsSection,
+  DisplayProducts,
+} from "@components/sections";
 
 function Landing() {
   return (
@@ -7,6 +11,10 @@ function Landing() {
       <BackgroundSection />
       {/* //* Brand Section */}
       <BrandsSection />
+      {/* //* New Arrivals */}
+      <DisplayProducts status="New Arrivals" title="New Arrivals" />
+      {/* //* Top Selling */}
+      <DisplayProducts status="Top Selling" title="Top Selling" />
     </>
   );
 }

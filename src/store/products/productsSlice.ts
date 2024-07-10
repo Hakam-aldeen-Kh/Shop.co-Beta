@@ -1,16 +1,19 @@
-// src/store/products/productsSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProduct from "./act/actGetProducts";
 import { TProduct, TLoading, isString } from "@types";
 
 export interface IProductsState {
   records: TProduct[];
+  topSelling: TProduct[];
+  newArrivals: TProduct[];
   loading: TLoading;
   error: string | null;
 }
 
 const initialState: IProductsState = {
   records: [],
+  topSelling: [],
+  newArrivals: [],
   loading: "idle",
   error: null,
 };
@@ -30,7 +33,12 @@ const productsSlice = createSlice({
     });
     builder.addCase(actGetProduct.fulfilled, (state, action) => {
       state.loading = "succeeded";
-      state.records = action.payload;
+      const status = action.meta.arg.status;
+      if (status === "Top Selling") {
+        state.topSelling = action.payload.data;
+      } else if (status === "New Arrivals") {
+        state.newArrivals = action.payload.data;
+      }
     });
     builder.addCase(actGetProduct.rejected, (state, action) => {
       state.loading = "failed";
@@ -41,6 +49,7 @@ const productsSlice = createSlice({
   },
 });
 
+export { actGetProduct };
 export const { cleanProductsRecords } = productsSlice.actions;
 
 export default productsSlice.reducer;
