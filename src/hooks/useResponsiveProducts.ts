@@ -19,6 +19,8 @@ const useResponsiveProducts = (status: string) => {
     return [];
   });
 
+  const { error, loading } = useAppSelector((state) => state.products);
+
   useEffect(() => {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth >= 992);
@@ -64,6 +66,8 @@ const useResponsiveProducts = (status: string) => {
     displayAll,
     calcPrice,
     records,
+    error,
+    loading,
   };
 };
 
