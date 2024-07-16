@@ -19,7 +19,7 @@ function Background() {
             Shop Now
           </Button>
           {/*  //* Number Section */}
-          <div className="pt-[30px] mb-[5%] md:pt-[70px] pb-[10px] grid grid-cols-1 md:grid-cols-3 justify-between w-full lg:w-[50%] gap-4 md:gap-0 font-[ubuntu] text-center md:text-start">
+          <div className="pt-[30px] md:mb-[5%] md:pt-[70px] pb-[10px] grid grid-cols-1 md:grid-cols-3 justify-between w-full lg:w-[50%] gap-4 md:gap-0 font-[ubuntu] text-center md:text-start">
             <div className="border-b-2 md:border-r-2 border-gray-600 w-full px-6 pb-4 md:pb-0 md:border-b-0">
               <h3 className="font-bold text-[30px]">200+</h3>
               <p className="font-[ubuntu] text-gray-600">
