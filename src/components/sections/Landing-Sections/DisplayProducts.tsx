@@ -57,7 +57,6 @@ function DisplayProducts({ status, title }: { status: string; title: string }) {
           </div>{" "}
         </>
       )}
-      <hr className="bg-gray-300 h-[0.1rem]" />
     </section>
   );
 }

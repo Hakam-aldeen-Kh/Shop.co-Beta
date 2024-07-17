@@ -3,6 +3,7 @@ import {
   BrandsSection,
   DisplayProducts,
 } from "@components/sections";
+import StylesSections from "@components/sections/Landing-Sections/StylesSections";
 
 function Landing() {
   return (
@@ -13,8 +14,11 @@ function Landing() {
       <BrandsSection />
       {/* //* New Arrivals */}
       <DisplayProducts status="New Arrivals" title="New Arrivals" />
+      <hr className="bg-gray-300 h-[0.1rem]" />
       {/* //* Top Selling */}
       <DisplayProducts status="Top Selling" title="Top Selling" />
+      {/* //* StylesSection */}
+      <StylesSections />
     </>
   );
 }
