@@ -19,7 +19,7 @@ const actGetProduct = createAsyncThunk(
         query.append("filters[category][title][$eq]", params.category);
       query.append("populate", "*");
       const response = await axios.get(
-        `http://localhost:1337/api/products?${query.toString()}`
+        `products?${query.toString()}`
       );
       return response.data;
     } catch (error) {
