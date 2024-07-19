@@ -2,8 +2,9 @@ import {
   BackgroundSection,
   BrandsSection,
   DisplayProducts,
+  StylesSections,
+  ReviewsSection,
 } from "@components/sections";
-import StylesSections from "@components/sections/Landing-Sections/StylesSections";
 
 function Landing() {
   return (
@@ -19,6 +20,8 @@ function Landing() {
       <DisplayProducts status="Top Selling" title="Top Selling" />
       {/* //* StylesSection */}
       <StylesSections />
+      {/* //* ReviewsSection */}
+      <ReviewsSection />
     </>
   );
 }
