@@ -13,7 +13,7 @@ type TLottieComponent = {
 function LottieHandler({ type, message }: TLottieComponent) {
   const lottie = lottieTypes[type];
   return (
-    <div className="text-center flex items-center flex-col">
+    <div className="text-center flex items-center flex-col my-[50px]">
       <Lottie animationData={lottie} className="w-[200px]" />
       {message && <h3 className="font-bold mb-3">{message}</h3>}
     </div>
