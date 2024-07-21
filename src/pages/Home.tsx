@@ -1,10 +1,11 @@
-import { Header, Landing } from "@components/index";
+import { Footer, Header, Landing } from "@components/index";
 
 function Home() {
   return (
     <div>
       <Header />
       <Landing />
+      <Footer />
     </div>
   );
 }
