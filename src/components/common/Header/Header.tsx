@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Basket from "@assets/svg/Basket.svg";
 import User from "@assets/svg/User.svg";
 import DownArrow from "@assets/svg/DownArrow.svg";
+import NavButton from "../Buttons/NavButton";
 
 function Header() {
   const [display, setDisplay] = useState(true);
@@ -59,7 +60,9 @@ function Header() {
               }}
             ></i>
           </div>
-          <h1 className="font-[cairo] font-bold text-3xl">SHOP.CO</h1>
+          <NavButton to="/" className="my-custom-class">
+            <h1 className="font-[cairo] font-bold text-3xl">SHOP.CO</h1>
+          </NavButton>
         </div>
         <ul
           className={`${menuOpen ? "flex" : "hidden"} ${
