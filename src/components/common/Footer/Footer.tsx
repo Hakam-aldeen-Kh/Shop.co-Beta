@@ -132,8 +132,8 @@ function Footer() {
           </p>
           <div className="flex justify-between w-[75%] md:w-[20%] mt-5 md:mt-0">
             {svgs.map((svg) => (
-              <div className="bg-white w-[15%] flex justify-center items-center">
-                <img src={svg} className="w-[80%]" />
+              <div key={svg} className="bg-white w-[15%] flex justify-center items-center">
+                <img src={svg} alt={`${svg} logo`} className="w-[80%]" />
               </div>
             ))}
           </div>
