@@ -34,7 +34,8 @@
       "@store/*": ["src/store/*"],
       "@types/*": ["src/types/*"],
       "@types": ["src/types/index"],
-      "@validations/*": ["src/validations/*"]
+      "@validations/*": ["src/validations/*"],
+      "@layout/*": ["src/layout/*"]
     }
   },
   "include": ["src"]
