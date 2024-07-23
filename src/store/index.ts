@@ -1,11 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./products/productsSlice";
 import reviewsSlice from "./reviews/reviewsSlice";
+import categoriesSlice from "./categories/categoriesSlice";
+import colorsSlice from "./colors/colorsSlice";
+import sizesSlice from "./sizes/sizesSlice";
+import stylesSlice from "./styles/stylesSlice";
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
     reviews: reviewsSlice,
+    categories: categoriesSlice,
+    colors: colorsSlice,
+    sizes: sizesSlice,
+    styles: stylesSlice,
   },
 });
 
