@@ -1,4 +1,5 @@
 import NavButton from "@components/common/Buttons/NavButton";
+import RightArrow from "@assets/svg/right-arrow.svg"
 
 function Breadcrumbs() {
   return (
@@ -20,7 +21,7 @@ function Breadcrumbs() {
               </svg>
             </NavButton>
             <span className="mx-2 text-sm antialiased  leading-normal pointer-events-none select-none text-blue-gray-500">
-              {`>`}
+              <img src={RightArrow} />
             </span>
           </li>
           <li className="flex items-center text-sm antialiased leading-normal transition-colors duration-300 cursor-pointer text-blue-gray-900 hover:text-gray-600">
