@@ -3,6 +3,7 @@ import useResponsiveProducts from "@hooks/useResponsiveProducts";
 import { Button } from "@material-tailwind/react";
 import LottieHandler from "@components/Feedback/Lottie/LottieHandler";
 import ProductSkeleton from "@components/Feedback/Skeleton/ProductSkeleton/ProductSkeleton";
+import useCalcPrice from "@hooks/useCalcPrice";
 
 function DisplayProducts({ status, title }: { status: string; title: string }) {
   const {
@@ -10,7 +11,6 @@ function DisplayProducts({ status, title }: { status: string; title: string }) {
     isLoading,
     hiddenButton,
     displayAll,
-    calcPrice,
     records,
     loading,
     error,
@@ -37,7 +37,7 @@ function DisplayProducts({ status, title }: { status: string; title: string }) {
               <Product
                 key={product.id}
                 product={product}
-                calcPrice={calcPrice}
+                calcPrice={useCalcPrice}
               />
             ))}
           </div>

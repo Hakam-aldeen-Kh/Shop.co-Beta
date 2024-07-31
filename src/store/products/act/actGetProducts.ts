@@ -1,26 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 
-interface FetchProductsParams {
-  status?: string;
-  category?: string;
-}
-
-const actGetProduct = createAsyncThunk(
-  "product/getProduct",
-  async (params: FetchProductsParams, thunkAPI) => {
+const actGetProducts = createAsyncThunk(
+  "products/getProducts",
+  async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const query = new URLSearchParams();
-      if (params.status)
-        query.append("filters[statuses][title][$eq]", params.status);
-      if (params.category)
-        query.append("filters[category][title][$eq]", params.category);
-      query.append("populate", "*");
-      const response = await axios.get(
-        `products?${query.toString()}`
-      );
+      const response = await axios.get("products?populate=*");
       return response.data;
     } catch (error) {
       if (isAxiosError(error)) {
@@ -34,4 +20,4 @@ const actGetProduct = createAsyncThunk(
   }
 );
 
-export default actGetProduct;
+export default actGetProducts;

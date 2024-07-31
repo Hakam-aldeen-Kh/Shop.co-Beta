@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import actGetProduct from "./act/actGetProducts";
+import actFilterProducts from "./act/actFilterProducts";
 import { TProduct, TLoading, isString } from "@types";
+import actGetProducts from "./act/actGetProducts";
 
 export interface IProductsState {
   records: TProduct[];
@@ -22,16 +23,18 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    cleanProductsRecords: (state) => {
-      state.records = [];
+    cleanProductsStates: (state) => {
+      state.loading = "idle";
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(actGetProduct.pending, (state) => {
+    //* Filter Products
+    builder.addCase(actFilterProducts.pending, (state) => {
       state.loading = "pending";
       state.error = null;
     });
-    builder.addCase(actGetProduct.fulfilled, (state, action) => {
+    builder.addCase(actFilterProducts.fulfilled, (state, action) => {
       state.loading = "succeeded";
       const status = action.meta.arg.status;
       if (status === "Top Selling") {
@@ -40,7 +43,22 @@ const productsSlice = createSlice({
         state.newArrivals = action.payload.data;
       }
     });
-    builder.addCase(actGetProduct.rejected, (state, action) => {
+    builder.addCase(actFilterProducts.rejected, (state, action) => {
+      state.loading = "failed";
+      if (isString(action.payload)) {
+        state.error = action.payload;
+      }
+    });
+    //* All Products
+    builder.addCase(actGetProducts.pending, (state) => {
+      state.loading = "pending";
+      state.error = null;
+    });
+    builder.addCase(actGetProducts.fulfilled, (state, action) => {
+      state.loading = "succeeded";
+      state.records = action.payload.data;
+    });
+    builder.addCase(actGetProducts.rejected, (state, action) => {
       state.loading = "failed";
       if (isString(action.payload)) {
         state.error = action.payload;
@@ -49,7 +67,7 @@ const productsSlice = createSlice({
   },
 });
 
-export { actGetProduct };
-export const { cleanProductsRecords } = productsSlice.actions;
+export { actFilterProducts };
+export const { cleanProductsStates } = productsSlice.actions;
 
 export default productsSlice.reducer;

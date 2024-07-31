@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { TProduct } from "@types";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actGetProduct } from "@store/products/productsSlice";
+import {
+  actFilterProducts,
+  cleanProductsStates,
+} from "@store/products/productsSlice";
 
 const useResponsiveProducts = (status: string) => {
   const dispatch = useAppDispatch();
@@ -32,7 +35,10 @@ const useResponsiveProducts = (status: string) => {
   }, []);
 
   useEffect(() => {
-    dispatch(actGetProduct({ status }));
+    dispatch(actFilterProducts({ status }));
+    return () => {
+      dispatch(cleanProductsStates());
+    };
   }, [dispatch, status]);
 
   useEffect(() => {
@@ -54,17 +60,11 @@ const useResponsiveProducts = (status: string) => {
     }, 2000);
   };
 
-  const calcPrice = (price: number, discount: number) => {
-    const finalPrice = price - (discount * price) / 100;
-    return finalPrice;
-  };
-
   return {
     displayedRecords,
     isLoading,
     hiddenButton,
     displayAll,
-    calcPrice,
     records,
     error,
     loading,
