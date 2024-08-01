@@ -5,22 +5,30 @@ import { isAxiosError } from "axios";
 interface FetchProductsParams {
   status?: string;
   category?: string;
+  color?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }
 
 const actFilterProducts = createAsyncThunk(
   "product/filterProducts",
-  async (params: FetchProductsParams, thunkAPI) => {
+  async (params: FetchProductsParams = {}, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
       const query = new URLSearchParams();
-      if (params.status)
+      if (params?.status)
         query.append("filters[statuses][title][$eq]", params.status);
-      if (params.category)
+      if (params?.category)
         query.append("filters[category][title][$eq]", params.category);
+      if (params?.color)
+        query.append("filters[color][title][$eq]", params.color);
+      if (params?.minPrice !== undefined)
+        query.append("filters[price][$gte]", params.minPrice.toString());
+      if (params?.maxPrice !== undefined)
+        query.append("filters[price][$lte]", params.maxPrice.toString());
       query.append("populate", "*");
-      const response = await axios.get(
-        `products?${query.toString()}`
-      );
+      const response = await axios.get(`products?${query.toString()}`);
+      console.log(`products?${query.toString()}`);
       return response.data;
     } catch (error) {
       if (isAxiosError(error)) {

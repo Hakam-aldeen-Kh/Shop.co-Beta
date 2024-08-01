@@ -1,16 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MainTitle from "./MainTitle";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { actGetColors } from "@store/colors/colorsSlice";
 import ColorSkeleton from "@components/Feedback/Skeleton/ColorSkeleton/ColorSkeleton";
 
-function ColorFilter() {
+// Define the type for the props
+interface ColorFilterProps {
+  setColor: (color: string) => void;
+}
+
+function ColorFilter({ setColor }: ColorFilterProps) {
   const dispatch = useAppDispatch();
   const { records, loading } = useAppSelector((state) => state.colors);
+
+  const [activeColor, setActiveColor] = useState<string | null>(null);
 
   useEffect(() => {
     dispatch(actGetColors());
   }, [dispatch]);
+
+  const handleColorClick = (colorTitle: string) => {
+    setActiveColor(colorTitle);
+    setColor(colorTitle);
+  };
 
   return (
     <div className="border-b py-2 border-gray-300">
@@ -24,13 +36,16 @@ function ColorFilter() {
                 key={color.id}
                 style={{ backgroundColor: color.attributes.degree }}
                 className="cursor-pointer w-8 h-8 group rounded-full mx-auto border border-gray-300 flex items-center justify-center"
+                onClick={() => handleColorClick(color.attributes.title)}
               >
                 <i
                   className={`fa-solid fa-check ${
                     color.attributes.title === "white"
                       ? "text-black"
                       : "text-white"
-                  } hidden group-hover:block`}
+                  } ${
+                    activeColor === color.attributes.title ? "block" : "hidden"
+                  }`}
                 ></i>
               </div>
             ))}

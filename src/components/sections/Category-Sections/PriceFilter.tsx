@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Range, getTrackBackground } from "react-range";
 import MainTitle from "./MainTitle";
 
@@ -6,8 +5,12 @@ const STEP = 1;
 const MIN = 0;
 const MAX = 1000;
 
-function PriceFilter() {
-  const [values, setValues] = useState([0, 1000]);
+interface PriceFilterProps {
+  values: number[];
+  setValues: (values: [number, number]) => void;
+}
+
+function PriceFilter({ values, setValues }: PriceFilterProps) {
   return (
     <div className="border-b py-2 border-gray-300">
       <MainTitle title="Price">
@@ -16,7 +19,7 @@ function PriceFilter() {
           step={STEP}
           min={MIN}
           max={MAX}
-          onChange={(values) => setValues(values)}
+          onChange={(values) => setValues(values as [number, number])}
           renderTrack={({ props, children }) => (
             <div
               {...props}
