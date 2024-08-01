@@ -10,7 +10,7 @@ function Product({ product, calcPrice }: ProductItemProps) {
   const coverUrl = product.attributes.cover.data.attributes.url;
 
   return (
-    <div key={product.id} className="product-item min-w-[200px]">
+    <div key={product.id} className="product-item min-w-[200px] h-fit">
       <img
         src={`http://localhost:1337${coverUrl}`}
         alt={product.attributes.title}

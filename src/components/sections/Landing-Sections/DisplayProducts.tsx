@@ -25,7 +25,7 @@ function DisplayProducts({ status, title }: { status: string; title: string }) {
       </div>
       {loading === "pending" ? (
         <div className="container flex lg:grid lg:grid-cols-4 gap-4 lg:gap-y-12 overflow-x-scroll md:overflow-auto">
-          <ProductSkeleton />
+          <ProductSkeleton number={4} />
         </div>
       ) : error ? (
         <LottieHandler type="Error" message={error} />

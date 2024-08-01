@@ -1,7 +1,7 @@
 import ContentLoader from "react-content-loader";
 
-function ProductSkeleton() {
-  const renderSkeleton = Array(4)
+function ProductSkeleton({number} : {number : number}) {
+  const renderSkeleton = Array(number)
     .fill(0)
     .map((_, idx) => (
       <ContentLoader

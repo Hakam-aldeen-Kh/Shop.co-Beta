@@ -1,20 +1,33 @@
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import actGetProducts from "@store/products/act/actGetProducts";
-import { TProduct } from "@types";
 import { useEffect } from "react";
+import actFilterProducts from "@store/products/act/actFilterProducts";
 
-const useCategory = () =>{
-  const dispatch = useAppDispatch();
-  const allProducts = useAppSelector((state) => state.products.records) as Array<TProduct>;
-
-  useEffect(() => {
-    dispatch(actGetProducts());
-  });
-
-  return {
-    dispatch,
-    allProducts
-  }
+interface Filters {
+  status?: string;
+  category?: string;
+  priceRange?: [number, number];
+  color?: string;
+  size?: string;
+  style?: string;
 }
 
-export default useCategory
+const useCategory = (filters: Filters) => {
+  const dispatch = useAppDispatch();
+  const {
+    records: allProducts,
+    loading,
+    error,
+  } = useAppSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(actFilterProducts(filters));
+  }, [dispatch, filters]);
+
+  return {
+    loading,
+    error,
+    allProducts,
+  };
+};
+
+export default useCategory;

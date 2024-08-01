@@ -41,6 +41,8 @@ const productsSlice = createSlice({
         state.topSelling = action.payload.data;
       } else if (status === "New Arrivals") {
         state.newArrivals = action.payload.data;
+      } else {
+        state.records = action.payload.data;
       }
     });
     builder.addCase(actFilterProducts.rejected, (state, action) => {
