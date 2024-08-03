@@ -12,9 +12,9 @@ function StylesFilter() {
     dispatch(actGetStyles());
   }, [dispatch]);
   return (
-    <div className="py-2">
+    <div className="py-2 mb-3">
       <MainTitle title="Dress Style">
-        <div className=" py-5 border-gray-300">
+        <div className="border-gray-300">
           {loading === "pending" ? (
             <CategoryMenuSkeleton />
           ) : (
