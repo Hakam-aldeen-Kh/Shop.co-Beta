@@ -5,6 +5,7 @@ import StylesSections from "./Landing-Sections/StylesSections";
 import ReviewsSection from "./Landing-Sections/ReviewsSection";
 import Breadcrumbs from "./Category-Sections/Breadcrumbs";
 import Filter from "./Category-Sections/Filter";
+import Controller from "./Category-Sections/Controller";
 
 export {
   BackgroundSection,
@@ -13,5 +14,6 @@ export {
   StylesSections,
   ReviewsSection,
   Breadcrumbs,
-  Filter
+  Filter,
+  Controller,
 };

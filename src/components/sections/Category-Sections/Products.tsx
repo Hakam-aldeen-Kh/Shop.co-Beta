@@ -2,28 +2,29 @@ import Product from "@components/common/Product/Product";
 import LottieHandler from "@components/Feedback/Lottie/LottieHandler";
 import ProductSkeleton from "@components/Feedback/Skeleton/ProductSkeleton/ProductSkeleton";
 import { useCalcPrice } from "@hooks/index";
-import useCategory from "@hooks/useCategory";
-import { useState } from "react";
+import { TCategoryController, TProduct } from "@types";
 
-function Products() {
-  const [filters] = useState({});
-  const { allProducts, loading, error } = useCategory(filters);
+type ProductsProps = {
+  categoryController: TCategoryController;
+};
 
+function Products({ categoryController }: ProductsProps) {
+  const { loading, error, allProducts, start, end } = categoryController;
   return (
     <>
       {loading === "pending" ? (
-        <div className="grid grid-cols-3 gap-6 w-[80%] pl-6">
+        <div className="grid grid-cols-3 gap-6 w-full pl-6">
           <ProductSkeleton number={9} />
         </div>
       ) : error ? (
         <div className="w-full h-full flex justify-center items-center">
           <LottieHandler type="Error" message={error} />
         </div>
-      ) : allProducts.length == 0 ? (
+      ) : allProducts.length === 0 ? (
         "No Products"
       ) : (
-        <div className="grid grid-cols-3 gap-6 w-[80%] pl-6">
-          {allProducts.map((product) => (
+        <div className="grid grid-cols-3 gap-6 w-full pl-6 top-0">
+          {allProducts.slice(start, end).map((product: TProduct) => (
             <Product
               key={product.id}
               product={product}

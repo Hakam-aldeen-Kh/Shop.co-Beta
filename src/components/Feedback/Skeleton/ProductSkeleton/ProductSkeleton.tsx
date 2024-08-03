@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-function ProductSkeleton({number} : {number : number}) {
+function ProductSkeleton({ number }: { number: number }) {
   const renderSkeleton = Array(number)
     .fill(0)
     .map((_, idx) => (
@@ -12,7 +12,7 @@ function ProductSkeleton({number} : {number : number}) {
         viewBox="0 0 210 425"
         backgroundColor="#ededed"
         foregroundColor="#fcfcfc"
-        className="product-item min-w-[200px] mx-auto"
+        className="product-item min-w-[300px] mx-auto"
       >
         <rect x="4" y="196" rx="3" ry="3" width="111" height="10" />
         <rect x="5" y="215" rx="3" ry="3" width="111" height="10" />
