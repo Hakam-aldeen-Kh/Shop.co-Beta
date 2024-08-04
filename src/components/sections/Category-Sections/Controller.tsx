@@ -11,14 +11,14 @@ function Controller({ categoryController }: ControllerProps) {
   const currentPage = Math.floor(start / itemsPerPage) + 1;
 
   return (
-    <div className="mt-16 ml-6 flex justify-between items-center max-h-[35px] relative bottom-0 self-end">
+    <div className="mt-16 md:ml-6 flex justify-between items-center max-h-[35px] relative bottom-0 self-end">
       <Button
         variant="outlined"
-        className="border-gray-500 py-2 capitalize min-w-[120px]"
+        className="border-gray-500 py-2 capitalize text-xs px-3"
         onClick={prev}
         disabled={start <= 0}
       >
-        <i className="fa-solid fa-arrow-left text-black pr-3"></i>
+        <i className="fa-solid fa-arrow-left text-black pr-3 inline"></i>
         Previous
       </Button>
       <div className="flex space-x-2 mx-auto items-center text-gray-600 bg-none font-[ubuntu] text-sm">
@@ -36,12 +36,12 @@ function Controller({ categoryController }: ControllerProps) {
       </div>
       <Button
         variant="outlined"
-        className="border-gray-500 py-2 capitalize min-w-[120px]"
+        className="border-gray-500 py-2 capitalize text-xs px-3"
         onClick={next}
         disabled={end >= allProducts.length}
       >
         Next
-        <i className="fa-solid fa-arrow-right text-black pl-3"></i>
+        <i className="fa-solid fa-arrow-right text-black pl-3 inline"></i>
       </Button>
     </div>
   );
