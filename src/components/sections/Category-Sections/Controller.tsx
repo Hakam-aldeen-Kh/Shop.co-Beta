@@ -6,9 +6,7 @@ type ControllerProps = {
 };
 
 function Controller({ categoryController }: ControllerProps) {
-  const { prev, next, start, end, allProducts, handlePageClick } =
-    categoryController;
-  const itemsPerPage = 9;
+  const { prev, next, start, end, allProducts, handlePageClick, itemsPerPage } = categoryController;
   const totalPages = Math.ceil(allProducts.length / itemsPerPage);
   const currentPage = Math.floor(start / itemsPerPage) + 1;
 

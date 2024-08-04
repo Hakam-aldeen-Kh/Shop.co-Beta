@@ -6,6 +6,7 @@ export type TCategoryController = {
   allProducts: TProduct[];
   start: number;
   end: number;
+  itemsPerPage: number;
   next: () => void;
   prev: () => void;
   handlePageClick: (page: number) => void;
