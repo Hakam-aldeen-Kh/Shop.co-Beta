@@ -10,19 +10,14 @@ import StylesFilter from "./StylesFilter";
 import { Button } from "@material-tailwind/react";
 import { actFilterProducts } from "@store/products/productsSlice";
 
-
-function Filter({ isOpen, onClose } : {isOpen : boolean, onClose : () => void}  ) {
+function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     dispatch(actGetCategories());
   }, [dispatch]);
-
   const [color, setColor] = useState<string>("");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
-
   const { loading, records } = useAppSelector((state) => state.categories);
-
   const handleApplyFilters = () => {
     dispatch(
       actFilterProducts({
@@ -35,7 +30,13 @@ function Filter({ isOpen, onClose } : {isOpen : boolean, onClose : () => void}  
   };
 
   return (
-    <div className={`md:w-[300px] font-[ubuntu] border border-gray-300 rounded-t-[17px] py-2 px-5 h-fit ${isOpen ? "fixed left-0 bottom-0 bg-white z-50 w-full h-full overflow-auto max-h-[80%]" : "hidden"} md:block`}>
+    <div
+      className={`md:w-[300px] font-[ubuntu] border border-gray-300 rounded-t-[17px] md:rounded-[17px] py-2 px-5 h-fit ${
+        isOpen
+          ? "fixed left-0 bottom-0 bg-white z-50 w-full h-full overflow-auto max-h-[80%]"
+          : "hidden"
+      } md:block`}
+    >
       <div className="flex items-center justify-between border-b py-3 border-gray-300">
         <h2 className="font-bold text-[20px]">Filters</h2>
         <i className="fa-solid fa-sliders rotate-90 text-[18px] hidden md:block"></i>
