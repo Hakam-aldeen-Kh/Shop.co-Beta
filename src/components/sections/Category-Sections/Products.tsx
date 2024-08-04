@@ -13,7 +13,7 @@ function Products({ categoryController }: ProductsProps) {
   return (
     <>
       {loading === "pending" ? (
-        <div className="grid grid-cols-3 gap-6 w-full pl-6">
+        <div className="grid lg:grid-cols-3 grid-cols-2 gap-6 w-full md:pl-6">
           <ProductSkeleton number={9} />
         </div>
       ) : error ? (
@@ -23,7 +23,7 @@ function Products({ categoryController }: ProductsProps) {
       ) : allProducts.length === 0 ? (
         "No Products"
       ) : (
-        <div className="grid grid-cols-3 gap-6 w-full pl-6 top-0">
+        <div className="grid lg:grid-cols-3 grid-cols-2 gap-6 w-full md:pl-6 top-0">
           {allProducts.slice(start, end).map((product: TProduct) => (
             <Product
               key={product.id}

@@ -11,7 +11,7 @@
   }
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   background-color: white;
   box-shadow: none;
   width: 15px;
@@ -19,4 +19,10 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: black;
+} */
+
+@media (min-width: 1024px) {
+  .filter-icon {
+    display: none;
+  }
 }

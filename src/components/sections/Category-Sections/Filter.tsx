@@ -10,7 +10,8 @@ import StylesFilter from "./StylesFilter";
 import { Button } from "@material-tailwind/react";
 import { actFilterProducts } from "@store/products/productsSlice";
 
-function Filter() {
+
+function Filter({ isOpen, onClose } : {isOpen : boolean, onClose : () => void}  ) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,13 +31,17 @@ function Filter() {
         maxPrice: priceRange[1],
       })
     );
+    onClose();
   };
 
   return (
-    <div className="w-[20%] font-[ubuntu] border border-gray-300 rounded-[15px] py-2 px-5 h-fit">
-      <div className="flex items-center justify-between border-b pb-5 border-gray-300">
+    <div className={`md:w-[300px] font-[ubuntu] border border-gray-300 rounded-t-[17px] py-2 px-5 h-fit ${isOpen ? "fixed left-0 bottom-0 bg-white z-50 w-full h-full overflow-auto max-h-[80%]" : "hidden"} md:block`}>
+      <div className="flex items-center justify-between border-b py-3 border-gray-300">
         <h2 className="font-bold text-[20px]">Filters</h2>
-        <i className="fa-solid fa-sliders rotate-90 text-gray-500 text-[18px]"></i>
+        <i className="fa-solid fa-sliders rotate-90 text-[18px] hidden md:block"></i>
+        <button onClick={onClose} className="md:hidden">
+          <i className="fa-solid fa-xmark text-red-600 text-2xl"></i>
+        </button>
       </div>
       <div className="border-b py-5 border-gray-300">
         {loading === "pending" ? (
