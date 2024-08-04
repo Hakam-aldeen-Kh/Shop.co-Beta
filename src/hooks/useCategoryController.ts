@@ -8,13 +8,16 @@ const useCategoryController = (): TCategoryController => {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(9);
   const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const updateItemsPerPage = useCallback(() => {
     let newItemsPerPage;
     if (window.innerWidth >= 1024) {
       newItemsPerPage = 9;
+      setIsFilterOpen(false);
     } else if (window.innerWidth >= 768) {
       newItemsPerPage = 8;
+      setIsFilterOpen(false);
     } else {
       newItemsPerPage = 6;
     }
@@ -53,16 +56,23 @@ const useCategoryController = (): TCategoryController => {
     setEnd(newEnd >= allProducts.length ? allProducts.length : newEnd);
   };
 
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   return {
     loading,
     error,
     allProducts,
     start,
     end,
+    itemsPerPage, // add itemsPerPage to the returned object
+    isFilterOpen,
+    setIsFilterOpen,
     next,
     prev,
     handlePageClick,
-    itemsPerPage, // add itemsPerPage to the returned object
+    toggleFilter,
   };
 };
 

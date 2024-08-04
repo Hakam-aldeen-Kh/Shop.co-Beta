@@ -7,7 +7,10 @@ export type TCategoryController = {
   start: number;
   end: number;
   itemsPerPage: number;
+  isFilterOpen: boolean;
   next: () => void;
   prev: () => void;
   handlePageClick: (page: number) => void;
+  setIsFilterOpen: (isOpen: boolean) => void;
+  toggleFilter: () => void;
 };

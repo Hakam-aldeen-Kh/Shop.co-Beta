@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Breadcrumbs, Filter } from "@components/sections";
 import Products from "@components/sections/Category-Sections/Products";
 import Controller from "@components/sections/Category-Sections/Controller";
@@ -6,13 +5,8 @@ import useCategoryController from "@hooks/useCategoryController";
 
 function Category() {
   const categoryController = useCategoryController();
-  const { start, end, allProducts } = categoryController;
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  const toggleFilter = () => {
-    setIsFilterOpen(!isFilterOpen);
-  };
-
+  const { start, end, allProducts, isFilterOpen, toggleFilter } =
+    categoryController;
   return (
     <>
       <Breadcrumbs />
@@ -37,7 +31,7 @@ function Category() {
           <Controller categoryController={categoryController} />
         </div>
       </div>
-      
+
       {isFilterOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center lg:hidden">
           <Filter isOpen={isFilterOpen} onClose={toggleFilter} />

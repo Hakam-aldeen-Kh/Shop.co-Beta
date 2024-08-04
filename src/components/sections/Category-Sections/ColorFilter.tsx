@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { actGetColors } from "@store/colors/colorsSlice";
 import ColorSkeleton from "@components/Feedback/Skeleton/ColorSkeleton/ColorSkeleton";
 
-// Define the type for the props
 interface ColorFilterProps {
   setColor: (color: string) => void;
 }
@@ -12,7 +11,6 @@ interface ColorFilterProps {
 function ColorFilter({ setColor }: ColorFilterProps) {
   const dispatch = useAppDispatch();
   const { records, loading } = useAppSelector((state) => state.colors);
-
   const [activeColor, setActiveColor] = useState<string | null>(null);
 
   useEffect(() => {
@@ -30,12 +28,12 @@ function ColorFilter({ setColor }: ColorFilterProps) {
         {loading === "pending" ? (
           <ColorSkeleton />
         ) : (
-          <div className="grid grid-cols-5 gap-2">
+          <div className="flex flex-wrap gap-3">
             {records.map((color) => (
               <div
                 key={color.id}
                 style={{ backgroundColor: color.attributes.degree }}
-                className="cursor-pointer w-8 h-8 group rounded-full mx-auto border border-gray-300 flex items-center justify-center"
+                className="cursor-pointer w-8 h-8 group rounded-full border border-gray-300"
                 onClick={() => handleColorClick(color.attributes.title)}
               >
                 <i
