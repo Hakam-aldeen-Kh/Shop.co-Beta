@@ -1,9 +1,8 @@
 import Product from "@components/common/Product/Product";
-import useResponsiveProducts from "@hooks/useResponsiveProducts";
 import { Button } from "@material-tailwind/react";
 import LottieHandler from "@components/Feedback/Lottie/LottieHandler";
 import ProductSkeleton from "@components/Feedback/Skeleton/ProductSkeleton/ProductSkeleton";
-import useCalcPrice from "@hooks/useCalcPrice";
+import { useCalcPrice, useResponsiveProducts } from "@hooks/index";
 
 function DisplayProducts({ status, title }: { status: string; title: string }) {
   const {

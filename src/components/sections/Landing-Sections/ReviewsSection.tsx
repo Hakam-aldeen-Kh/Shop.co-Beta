@@ -5,7 +5,7 @@ import ReviewSkeleton from "@components/Feedback/Skeleton/ReviewSkeleton/ReviewS
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
-import useReviews from "@hooks/useReviews";
+import { useReviews } from "@hooks/index";
 
 function ReviewsSection() {
   const { loading, records, error, swiperRef } = useReviews();

@@ -1,7 +1,7 @@
 import { Breadcrumbs, Filter } from "@components/sections";
 import Products from "@components/sections/Category-Sections/Products";
 import Controller from "@components/sections/Category-Sections/Controller";
-import useCategoryController from "@hooks/useCategoryController";
+import { useCategoryController } from "@hooks/index";
 
 function Category() {
   const categoryController = useCategoryController();
