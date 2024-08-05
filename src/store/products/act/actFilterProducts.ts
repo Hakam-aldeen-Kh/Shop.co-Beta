@@ -8,6 +8,7 @@ interface FetchProductsParams {
   color?: string;
   minPrice?: number;
   maxPrice?: number;
+  size?: string;
 }
 
 const actFilterProducts = createAsyncThunk(
@@ -26,6 +27,8 @@ const actFilterProducts = createAsyncThunk(
         query.append("filters[price][$gte]", params.minPrice.toString());
       if (params?.maxPrice !== undefined)
         query.append("filters[price][$lte]", params.maxPrice.toString());
+      if (params?.size)
+        query.append("filters[sizes][title][$eq]", params.size.toString());
       query.append("populate", "*");
       const response = await axios.get(`products?${query.toString()}`);
       console.log(`products?${query.toString()}`);

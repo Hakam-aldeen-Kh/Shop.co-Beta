@@ -14,7 +14,9 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const dispatch = useAppDispatch();
   const [color, setColor] = useState<string>("");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 500]);
+  const [size, setSize] = useState<string>("");
   const [showCheck, setShowCheck] = useState<boolean>(true);
+  const [sizeCheck, setSizeCheck] = useState<boolean>(true);
   const { loading, records } = useAppSelector((state) => state.categories);
 
   useEffect(() => {
@@ -27,6 +29,7 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
         color: color,
         minPrice: priceRange[0],
         maxPrice: priceRange[1],
+        size: size,
       })
     );
     if (window.innerWidth <= 768) {
@@ -37,11 +40,22 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const handleResetFilters = () => {
     setColor("");
     setShowCheck(false);
-    setPriceRange([0,500])
+    setPriceRange([0, 500]);
+    setSize("");
+    setSizeCheck(false);
     dispatch(actFilterProducts({}));
     if (window.innerWidth <= 768) {
       onClose();
     }
+  };
+
+  const areFiltersDefault = () => {
+    return (
+      color === "" &&
+      priceRange[0] === 0 &&
+      priceRange[1] === 500 &&
+      size === ""
+    );
   };
 
   return (
@@ -82,18 +96,28 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
         )}
       </div>
       <PriceFilter values={priceRange} setValues={setPriceRange} />
-      <ColorFilter setColor={setColor} showCheck={showCheck} setShowCheck={setShowCheck} />
-      <SizeFilter />
+      <ColorFilter
+        setColor={setColor}
+        showCheck={showCheck}
+        setShowCheck={setShowCheck}
+      />
+      <SizeFilter
+        setValue={setSize}
+        sizeCheck={sizeCheck}
+        setSizeCheck={setSizeCheck}
+      />
       <StylesFilter />
       <Button
         className="font-[ubuntu] cursor-pointer rounded-full py-[10px] w-full capitalize text-[14px] bg-black"
         onClick={handleApplyFilters}
+        disabled={areFiltersDefault()} // Disable button if filters are in default state
       >
         Apply Filter
       </Button>
       <Button
         className="font-[ubuntu] cursor-pointer rounded-full py-[10px] w-full capitalize text-[14px] bg-red-700 text-white mt-5"
         onClick={handleResetFilters}
+        disabled={areFiltersDefault()} // Disable button if filters are in default state
       >
         Reset Filter
       </Button>
