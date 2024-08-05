@@ -29,7 +29,7 @@ function ColorFilter({ setColor, showCheck, setShowCheck }: ColorFilterProps) {
                 onClick={() => handleColorClick(color.attributes.title)}
               >
                 <i
-                  className={`fa-solid fa-check ${
+                  className={`fa-solid fa-check group-hover:block ${
                     color.attributes.title === "white"
                       ? "text-black"
                       : "text-white"
