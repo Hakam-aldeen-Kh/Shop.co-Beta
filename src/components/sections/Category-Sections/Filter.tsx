@@ -13,7 +13,7 @@ import { actFilterProducts } from "@store/products/productsSlice";
 function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const dispatch = useAppDispatch();
   const [color, setColor] = useState<string>("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 500]);
   const [showCheck, setShowCheck] = useState<boolean>(true);
   const { loading, records } = useAppSelector((state) => state.categories);
 
@@ -37,6 +37,7 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const handleResetFilters = () => {
     setColor("");
     setShowCheck(false);
+    setPriceRange([0,500])
     dispatch(actFilterProducts({}));
     if (window.innerWidth <= 768) {
       onClose();

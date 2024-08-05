@@ -3,7 +3,7 @@ import MainTitle from "./MainTitle";
 
 const STEP = 1;
 const MIN = 0;
-const MAX = 1000;
+const MAX = 500;
 
 interface PriceFilterProps {
   values: number[];
