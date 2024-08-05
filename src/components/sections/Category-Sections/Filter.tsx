@@ -12,12 +12,15 @@ import { actFilterProducts } from "@store/products/productsSlice";
 
 function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const dispatch = useAppDispatch();
+  const [color, setColor] = useState<string>("");
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+  const [showCheck, setShowCheck] = useState<boolean>(true);
+  const { loading, records } = useAppSelector((state) => state.categories);
+
   useEffect(() => {
     dispatch(actGetCategories());
   }, [dispatch]);
-  const [color, setColor] = useState<string>("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
-  const { loading, records } = useAppSelector((state) => state.categories);
+
   const handleApplyFilters = () => {
     dispatch(
       actFilterProducts({
@@ -26,7 +29,18 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
         maxPrice: priceRange[1],
       })
     );
-    onClose();
+    if (window.innerWidth <= 768) {
+      onClose();
+    }
+  };
+
+  const handleResetFilters = () => {
+    setColor("");
+    setShowCheck(false);
+    dispatch(actFilterProducts({}));
+    if (window.innerWidth <= 768) {
+      onClose();
+    }
   };
 
   return (
@@ -67,7 +81,7 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
         )}
       </div>
       <PriceFilter values={priceRange} setValues={setPriceRange} />
-      <ColorFilter setColor={setColor} />
+      <ColorFilter setColor={setColor} showCheck={showCheck} setShowCheck={setShowCheck} />
       <SizeFilter />
       <StylesFilter />
       <Button
@@ -78,7 +92,7 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
       </Button>
       <Button
         className="font-[ubuntu] cursor-pointer rounded-full py-[10px] w-full capitalize text-[14px] bg-red-700 text-white mt-5"
-        onClick={() => dispatch(actFilterProducts({}))}
+        onClick={handleResetFilters}
       >
         Reset Filter
       </Button>
