@@ -1,62 +1,27 @@
-import { actGetCategories } from "@store/categories/categoriesSlice";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { useEffect, useState } from "react";
-import Rightarrow from "@assets/svg/right-arrow.svg";
-import CategoryMenuSkeleton from "@components/Feedback/Skeleton/CategoryMenuSkeleton/CategoryMenuSkeleton";
 import PriceFilter from "./PriceFilter";
 import ColorFilter from "./ColorFilter";
 import SizeFilter from "./SizeFilter";
-import StylesFilter from "./StylesFilter";
 import { Button } from "@material-tailwind/react";
-import { actFilterProducts } from "@store/products/productsSlice";
+import CategoryFilter from "./CategoryFilter";
+import StylesFilter from "./StylesFilter";
+import useFilter from "@hooks/useFilter";
 
 function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const dispatch = useAppDispatch();
-  const [color, setColor] = useState<string>("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 500]);
-  const [size, setSize] = useState<string>("");
-  const [showCheck, setShowCheck] = useState<boolean>(true);
-  const [sizeCheck, setSizeCheck] = useState<boolean>(true);
-  const { loading, records } = useAppSelector((state) => state.categories);
-
-  useEffect(() => {
-    dispatch(actGetCategories());
-  }, [dispatch]);
-
-  const handleApplyFilters = () => {
-    dispatch(
-      actFilterProducts({
-        color: color,
-        minPrice: priceRange[0],
-        maxPrice: priceRange[1],
-        size: size,
-      })
-    );
-    if (window.innerWidth <= 768) {
-      onClose();
-    }
-  };
-
-  const handleResetFilters = () => {
-    setColor("");
-    setShowCheck(false);
-    setPriceRange([0, 500]);
-    setSize("");
-    setSizeCheck(false);
-    dispatch(actFilterProducts({}));
-    if (window.innerWidth <= 768) {
-      onClose();
-    }
-  };
-
-  const areFiltersDefault = () => {
-    return (
-      color === "" &&
-      priceRange[0] === 0 &&
-      priceRange[1] === 500 &&
-      size === ""
-    );
-  };
+  const {
+    setCategory,
+    priceRange,
+    setPriceRange,
+    setColor,
+    showCheck,
+    setShowCheck,
+    sizeCheck,
+    setSize,
+    setSizeCheck,
+    setStyle,
+    handleApplyFilters,
+    areFiltersDefault,
+    handleResetFilters,
+  } = useFilter(onClose);
 
   return (
     <div
@@ -73,28 +38,7 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
           <i className="fa-solid fa-xmark text-red-600 text-2xl"></i>
         </button>
       </div>
-      <div className="border-b py-5 border-gray-300">
-        {loading === "pending" ? (
-          <CategoryMenuSkeleton />
-        ) : (
-          records.map((record) => (
-            <div
-              key={record.id}
-              className="flex items-center justify-between pb-3 last:pb-0 group cursor-pointer"
-              onClick={() =>
-                dispatch(
-                  actFilterProducts({ category: record.attributes.title })
-                )
-              }
-            >
-              <p className="text-gray-600 text-sm group-hover:font-bold transition-all duration-300">
-                {record.attributes.title}
-              </p>
-              <img src={Rightarrow} alt="arrow" />
-            </div>
-          ))
-        )}
-      </div>
+      <CategoryFilter setCategory={setCategory} onClose={onClose} />
       <PriceFilter values={priceRange} setValues={setPriceRange} />
       <ColorFilter
         setColor={setColor}
@@ -106,7 +50,7 @@ function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
         sizeCheck={sizeCheck}
         setSizeCheck={setSizeCheck}
       />
-      <StylesFilter />
+      <StylesFilter setStyle={setStyle} onClose={onClose} />
       <Button
         className="font-[ubuntu] cursor-pointer rounded-full py-[10px] w-full capitalize text-[14px] bg-black"
         onClick={handleApplyFilters}
