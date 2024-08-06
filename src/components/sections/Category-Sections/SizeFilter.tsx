@@ -1,31 +1,18 @@
-import { useEffect, useState } from "react";
+import { useSizeFilter } from "@hooks/index";
 import MainTitle from "./MainTitle";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actGetSizes } from "@store/sizes/sizesSlice";
 import SizeSkeleton from "@components/Feedback/Skeleton/SizeSkeleton/SizeSkeleton";
 
-type TSizeFilterProps = {
+type SizeFilterProps = {
   sizeCheck: boolean;
   setValue: (size: string) => void;
   setSizeCheck: (check: boolean) => void;
 };
 
-function SizeFilter({ sizeCheck, setValue, setSizeCheck }: TSizeFilterProps) {
-  const dispatch = useAppDispatch();
-  const { records, loading } = useAppSelector((state) => state.sizes);
-
-  const [activeSize, setActiveSize] = useState<string | null>(null);
-
-  useEffect(() => {
-    dispatch(actGetSizes());
-  }, [dispatch]);
-
-  const handleSizeClick = (size: string) => {
-    setActiveSize(size);
-    setValue(size);
-    setSizeCheck(true);
-  };
-
+function SizeFilter({ sizeCheck, setValue, setSizeCheck }: SizeFilterProps) {
+  const { loading, records, activeSize, handleSizeClick } = useSizeFilter(
+    setValue,
+    setSizeCheck
+  );
   return (
     <div className="border-b py-2 border-gray-300">
       <MainTitle title="Sizes">

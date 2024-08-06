@@ -5,10 +5,10 @@ const STEP = 1;
 const MIN = 0;
 const MAX = 500;
 
-interface PriceFilterProps {
+type PriceFilterProps = {
   values: number[];
   setValues: (values: [number, number]) => void;
-}
+};
 
 function PriceFilter({ values, setValues }: PriceFilterProps) {
   return (

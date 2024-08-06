@@ -6,7 +6,9 @@ import CategoryFilter from "./CategoryFilter";
 import StylesFilter from "./StylesFilter";
 import useFilter from "@hooks/useFilter";
 
-function Filter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+type FilterProps = { isOpen: boolean; onClose: () => void };
+
+function Filter({ isOpen, onClose }: FilterProps) {
   const {
     setCategory,
     priceRange,

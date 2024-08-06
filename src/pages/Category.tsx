@@ -17,7 +17,8 @@ function Category() {
             <h1 className="text-[25px] md:text-[30px] font-bold">Shop Now</h1>
             <div className="flex items-center">
               <p className="text-gray-600 font-semibold mr-14 md:mr-0 text-[15px]">
-                Showing {start + 1} - {end} of {allProducts.length} Products
+                Showing {end > 0 ? start + 1 : 0} - {end} of{" "}
+                {allProducts.length} Products
               </p>
               <button
                 className="bg-[#F0F0F0] h-[32px] w-[32px] text-black rounded-full md:hidden cursor-pointer"
@@ -31,7 +32,6 @@ function Category() {
           <Controller categoryController={categoryController} />
         </div>
       </div>
-
       {isFilterOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center lg:hidden">
           <Filter isOpen={isFilterOpen} onClose={toggleFilter} />

@@ -2,14 +2,14 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useEffect } from "react";
 import actFilterProducts from "@store/products/act/actFilterProducts";
 
-interface Filters {
+type Filters = {
   status?: string;
   category?: string;
   priceRange?: [number, number];
   color?: string;
   size?: string;
   style?: string;
-}
+};
 
 const useCategory = (filters: Filters) => {
   const dispatch = useAppDispatch();
