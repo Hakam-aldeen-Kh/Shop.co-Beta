@@ -14,7 +14,7 @@ function Products({ categoryController }: ProductsProps) {
     <>
       {loading === "pending" ? (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-2 gap-6 w-full md:pl-6">
-          <ProductSkeleton number={end - start} />
+          <ProductSkeleton number={9} />
         </div>
       ) : error ? (
         <div className="w-full h-full flex justify-center items-center">

@@ -1,6 +1,9 @@
 import { useAppDispatch } from "@store/hooks";
-import { useState } from "react";
-import { actFilterProducts } from "@store/products/productsSlice";
+import { useEffect, useState } from "react";
+import {
+  actFilterProducts,
+  cleanProductsStates,
+} from "@store/products/productsSlice";
 
 const useFilter = (onClose: () => void) => {
   const dispatch = useAppDispatch();
@@ -11,6 +14,12 @@ const useFilter = (onClose: () => void) => {
   const [style, setStyle] = useState<string>("");
   const [showCheck, setShowCheck] = useState<boolean>(true);
   const [sizeCheck, setSizeCheck] = useState<boolean>(true);
+
+  useEffect(() => {
+    return () => {
+      dispatch(cleanProductsStates());
+    };
+  }, [dispatch]);
 
   const handleApplyFilters = () => {
     dispatch(

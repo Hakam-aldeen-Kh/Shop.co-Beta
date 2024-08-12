@@ -10,6 +10,7 @@ interface FetchProductsParams {
   maxPrice?: number;
   size?: string;
   style?: string;
+  productId?: string;
 }
 
 const actFilterProducts = createAsyncThunk(
@@ -32,9 +33,10 @@ const actFilterProducts = createAsyncThunk(
         query.append("filters[sizes][title][$eq]", params.size.toString());
       if (params?.style)
         query.append("filters[styles][title][$eq]", params.style);
+      if (params?.productId) query.append("filters[id]", params.productId);
       query.append("populate", "*");
       const response = await axios.get(`products?${query.toString()}`);
-      console.log(`products?${query.toString()}`);
+      // console.log(`products?${query.toString()}`);
       return response.data;
     } catch (error) {
       if (isAxiosError(error)) {

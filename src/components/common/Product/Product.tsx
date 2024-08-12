@@ -1,5 +1,6 @@
 import { Rating } from "@material-tailwind/react";
 import { TProduct } from "@types";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface ProductItemProps {
   product: TProduct;
@@ -7,25 +8,59 @@ interface ProductItemProps {
 }
 
 function Product({ product, calcPrice }: ProductItemProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const coverUrl = product.attributes.cover.data.attributes.url;
+
+  const handleOnClick = () => {
+    const currentPath = location.pathname;
+    console.log("Current Path", currentPath);
+    let newPath;
+
+    if (currentPath.includes("/product")) {
+      // Remove existing product segment before adding new one
+      newPath =
+        currentPath.substring(0, currentPath.lastIndexOf("/product")) +
+        `/product/${product.id}`;
+    } else if (currentPath.includes("categories")) {
+      newPath = `${currentPath}/product/${product.id}`;
+    } else {
+      newPath = `categories/product/${product.id}`;
+    }
+
+    console.log("New Path", newPath);
+    navigate(newPath);
+  };
+
   return (
-    <div key={product.id} className="product-item min-w-[165px] h-fit">
-      <img
-        src={`http://localhost:1337${coverUrl}`}
-        alt={product.attributes.title}
-        className="w-full h-[200px] lg:h-[300px] object-cover rounded-[15px]"
-      />
+    <div
+      key={product.id}
+      className="product-item min-w-[165px] h-fit overflow-hidden group relative hover:cursor-pointer"
+      onClick={handleOnClick}
+    >
+      <div className="h-[200px] lg:h-[300px] overflow-hidden rounded-[15px] relative">
+        <div className="bg-black w-full py-2 lg:py-4 px-3 text-white text-center absolute transition-transform bottom-0 underline group-hover:translate-y-[0] flex items-center justify-center translate-y-[300px]">
+          Show Details
+          <i className=" text-base pl-2 fa-solid fa-up-right-from-square"></i>
+        </div>
+        <img
+          src={`http://localhost:1337${coverUrl}`}
+          alt={product.attributes.title}
+          className="w-full object-cover h-full"
+        />
+      </div>
       <h3 className="font-semibold font-[ubuntu] pl-2 my-2">
         {product.attributes.title}
       </h3>
       <div className="flex text-sm font-semibold items-center">
         <Rating value={product.attributes.rating} readonly />
-        <span className="mx-2">{product.attributes.rating} / 5 </span>
       </div>
-      <p className="font-semibold text-[18px] pl-2 mt-2">
+      <p className="font-semibold text-[20px] pl-2 mt-2">
         $
         {product.attributes.discount != null
-          ? calcPrice(product.attributes.price, product.attributes.discount)
+          ? Math.floor(
+              calcPrice(product.attributes.price, product.attributes.discount)
+            )
           : product.attributes.price}
         {product.attributes.discount && (
           <span className="inline-block mx-3">
