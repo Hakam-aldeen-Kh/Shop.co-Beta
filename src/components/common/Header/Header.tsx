@@ -99,11 +99,13 @@ function Header() {
             ></i>
           </div>
           <div className="flex items-center">
-            <img
-              src={Basket}
-              alt="Basket Icon"
-              className="w-[25px] mr-4 md:mx-6"
-            />
+            <NavButton to="/cart" className="my-custom-class">
+              <img
+                src={Basket}
+                alt="Basket Icon"
+                className="w-[25px] mr-4 md:mx-6"
+              />
+            </NavButton>
             <img src={User} alt="User Icon" className="w-[25px]" />
           </div>
         </div>

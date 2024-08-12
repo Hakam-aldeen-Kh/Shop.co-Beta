@@ -41,7 +41,7 @@ function ProductDetails() {
 
   return (
     <div>
-      <Breadcrumbs product={title} />
+      <Breadcrumbs title="Shop" product={title} />
       {/* Product details */}
       <div className="container flex items-start flex-wrap md:justify-between">
         <div className="w-full md:max-w-[50%] flex flex-wrap lg:flex-nowrap flex-row-reverse">

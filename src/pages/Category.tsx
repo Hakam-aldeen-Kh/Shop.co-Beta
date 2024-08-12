@@ -9,7 +9,7 @@ function Category() {
     categoryController;
   return (
     <>
-      <Breadcrumbs />
+      <Breadcrumbs title="Shop" />
       <div className="container w-full flex">
         <Filter isOpen={isFilterOpen} onClose={toggleFilter} />
         <div className=" font-[ubuntu] w-full relative">

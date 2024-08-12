@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "@layout/MainLayout";
-import Home from "@pages/Home";
-import Category from "@pages/Category";
-import ProductDetails from "@pages/ProductDetails";
+import { Home, Category, ProductDetails, Cart } from "@pages/index";
 
 function AppRouter() {
   return (
@@ -16,7 +14,7 @@ function AppRouter() {
         }
       />
       <Route
-        path="/categories"
+        path="/shop"
         element={
           <MainLayout>
             <Category />
@@ -24,10 +22,18 @@ function AppRouter() {
         }
       />
       <Route
-        path="/categories/product/:productId"
+        path="/shop/product/:productId"
         element={
           <MainLayout>
             <ProductDetails />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <MainLayout>
+            <Cart />
           </MainLayout>
         }
       />

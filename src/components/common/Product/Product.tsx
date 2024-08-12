@@ -22,10 +22,10 @@ function Product({ product, calcPrice }: ProductItemProps) {
       newPath =
         currentPath.substring(0, currentPath.lastIndexOf("/product")) +
         `/product/${product.id}`;
-    } else if (currentPath.includes("categories")) {
+    } else if (currentPath.includes("shop")) {
       newPath = `${currentPath}/product/${product.id}`;
     } else {
-      newPath = `categories/product/${product.id}`;
+      newPath = `shop/product/${product.id}`;
     }
 
     console.log("New Path", newPath);

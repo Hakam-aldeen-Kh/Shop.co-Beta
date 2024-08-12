@@ -1,7 +1,7 @@
 import NavButton from "@components/common/Buttons/NavButton";
 import RightArrow from "@assets/svg/right-arrow.svg";
 
-function Breadcrumbs({ product }: { product?: string }) {
+function Breadcrumbs({ title, product }: { title: string; product?: string }) {
   return (
     <div className="container w-full">
       <nav
@@ -25,8 +25,8 @@ function Breadcrumbs({ product }: { product?: string }) {
             <img src={RightArrow} alt="arrow" />
           </span>
           <li className="flex items-center text-sm antialiased leading-normal transition-colors duration-300 cursor-pointer text-blue-gray-900 hover:text-gray-600">
-            <NavButton to="/categories" className="custom-button">
-              <span>Shop</span>
+            <NavButton to={`/${title.toLowerCase()}`} className="custom-button">
+              <span>{title}</span>
             </NavButton>
           </li>
           {product && (

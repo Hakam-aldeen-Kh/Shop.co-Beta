@@ -15,7 +15,7 @@ function Background() {
             designed to bring out your individuality and cater to your sense of
             style.
           </p>
-          <NavButton to="categories" className="my-custom-class">
+          <NavButton to="shop" className="my-custom-class">
             <Button className="cursor-pointer rounded-full mt-[30px] px-[60px] py-[15px] w-full md:w-[200px] capitalize text-[15px] bg-black">
               Shop Now
             </Button>
