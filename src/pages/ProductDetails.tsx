@@ -1,60 +1,30 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Rating } from "@material-tailwind/react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actFilterProducts } from "@store/products/productsSlice";
 import { Breadcrumbs } from "@components/sections";
 import Product from "@components/common/Product/Product";
-import { useCalcPrice } from "@hooks/index";
+import { useCalcPrice, useProductDetails } from "@hooks/index";
+import ProductDetailsSkeleton from "@components/Feedback/Skeleton/ProductDetailsSkeleton/ProductDetailsSkeleton";
 
 function ProductDetails() {
-  const dispatch = useAppDispatch();
-  const { productId } = useParams<{ productId: string }>();
-  const [count, setCount] = useState(1);
-  const [isStockZero, setIsStockZero] = useState(false);
-  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const {
+    product,
+    sameProduct,
+    loading,
+    count,
+    isStockZero,
+    activeImage,
+    increment,
+    decrement,
+    handleImageClick,
+  } = useProductDetails();
 
-  const product = useAppSelector((state) =>
-    state.products.records.find(
-      (product) => product.id == parseInt(productId as string)
-    )
-  );
-
-  const sameProduct = useAppSelector((state) => state.products.sameProduct);
   const calcPrice = useCalcPrice;
 
-  // const { loading } = useAppSelector((state) => state.products);
-
-  useEffect(() => {
-    dispatch(actFilterProducts({ productId }));
-    return () => {
-      setCount(1);
-    };
-  }, [productId, dispatch]);
-
-  useEffect(() => {
-    if (product && product.attributes.stock - count === 0) {
-      setIsStockZero(true);
-      setTimeout(() => setIsStockZero(false), 300); // Reset after animation
-    }
-  }, [count, product]);
-
-  useEffect(() => {
-    if (product && product.attributes.cover?.data?.attributes?.url) {
-      setActiveImage(product.attributes.cover.data.attributes.url);
-    }
-  }, [product]);
-
-  useEffect(() => {
-    dispatch(
-      actFilterProducts({
-        category: product?.attributes.category.data?.attributes.title,
-      })
+  if (loading === "pending" || !product) {
+    return (
+      <div className="container">
+        <ProductDetailsSkeleton />
+      </div>
     );
-  }, [dispatch, product?.attributes.category.data?.attributes.title]);
-
-  if (!product) {
-    return <div>Product not found</div>;
   }
 
   const {
@@ -68,25 +38,6 @@ function ProductDetails() {
     stock,
     images,
   } = product.attributes;
-
-  const increment = () => {
-    if (count < stock) {
-      setCount(count + 1);
-    } else if (stock - count === 0) {
-      setIsStockZero(true);
-      setTimeout(() => setIsStockZero(false), 600); // Trigger animation
-    }
-  };
-
-  const decrement = () => {
-    if (count > 1) {
-      setCount(count - 1);
-    }
-  };
-
-  const handleImageClick = (url: string) => {
-    setActiveImage(url);
-  };
 
   return (
     <div>

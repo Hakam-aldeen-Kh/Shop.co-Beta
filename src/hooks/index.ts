@@ -5,6 +5,7 @@ import useResponsiveProducts from "./useResponsiveProducts";
 import useReviews from "./useReviews";
 import useFilter from "./useFilter";
 import useSizeFilter from "./useSizeFilter";
+import useProductDetails from "./useProductDetails";
 
 export {
   useCalcPrice,
@@ -14,4 +15,5 @@ export {
   useReviews,
   useFilter,
   useSizeFilter,
+  useProductDetails
 };
