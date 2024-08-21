@@ -6,6 +6,8 @@ import ReviewsSection from "./Landing-Sections/ReviewsSection";
 import Breadcrumbs from "../common/Breadcrumbs/Breadcrumbs";
 import Filter from "./Category-Sections/Filter";
 import Controller from "./Category-Sections/Controller";
+import CartList from "./Cart-Sections/CartList";
+import OrderSummary from "./Cart-Sections/OrderSummary";
 
 export {
   BackgroundSection,
@@ -16,4 +18,6 @@ export {
   Breadcrumbs,
   Filter,
   Controller,
+  CartList,
+  OrderSummary,
 };

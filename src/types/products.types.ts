@@ -1,5 +1,6 @@
 export type TProduct = {
   id: number;
+  quantity?: number;
   attributes: {
     createdAt: string;
     updatedAt: string;

@@ -6,14 +6,18 @@ import { type TCategories } from "./categories.types.ts";
 import { type TColors } from "./colors.types";
 import { type TSizes } from "./sizes.types.ts";
 import { type TCategoryController } from "./categorycontroller.types.ts";
+import { type TCartItem } from "./cart.types";
+import { type TCartItems } from "./cart.types";
 
 export {
   TProduct,
   TLoading,
-  isString,
   TReview,
   TCategories,
   TColors,
   TSizes,
   TCategoryController,
+  TCartItem,
+  TCartItems,
+  isString,
 };

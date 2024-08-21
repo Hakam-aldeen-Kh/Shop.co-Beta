@@ -1,4 +1,4 @@
-import { Rating } from "@material-tailwind/react";
+import { Button, Rating } from "@material-tailwind/react";
 import { Breadcrumbs } from "@components/sections";
 import Product from "@components/common/Product/Product";
 import { useCalcPrice, useProductDetails } from "@hooks/index";
@@ -12,8 +12,10 @@ function ProductDetails() {
     count,
     isStockZero,
     activeImage,
-    increment,
+    inCart,
     decrement,
+    increment,
+    handleAddToCart,
     handleImageClick,
   } = useProductDetails();
 
@@ -93,14 +95,17 @@ function ProductDetails() {
           <div className="flex items-center justify-between w-[50%]">
             <div
               className={`text-base inline-block pl-2 ${
-                stock - count === 0 ? "text-red-900" : "text-black"
+                stock - count - (inCart || 0) === 0
+                  ? "text-red-900"
+                  : "text-black"
               } ${
                 isStockZero
                   ? "transform scale-125 transition-transform duration-300"
                   : ""
               }`}
             >
-              <i className="fa-solid fa-box-archive"></i> {stock - count}
+              <i className="fa-solid fa-box-archive"></i>{" "}
+              {stock - count - (inCart || 0)}
             </div>
             <div className="flex items-center">
               <div
@@ -148,13 +153,19 @@ function ProductDetails() {
                 <i className="fa-solid fa-plus"></i>
               </button>
             </div>
-            <button
-              onClick={increment}
-              className="ml-3 bg-black text-white py-3 rounded-full w-[55%]"
+            <Button
+              onClick={handleAddToCart}
+              className="ml-3 bg-black text-white py-4 rounded-full w-[55%]"
+              disabled={
+                // 7 - ( 7 > 1 ? 7
+                count -
+                  ((inCart || 0) > 1 && inCart === 1 ? inCart || 0 : 0) ===
+                  0 || stock - count - (inCart || 0) === 0
+              }
             >
               <i className="fa-solid fa-cart-plus mr-3"></i>
               Add To Cart
-            </button>
+            </Button>
           </div>
           <hr className="bg-gray-500 h-[0.1rem] my-[15px]" />
         </div>

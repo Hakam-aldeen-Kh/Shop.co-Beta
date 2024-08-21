@@ -3,6 +3,7 @@ import Basket from "@assets/svg/Basket.svg";
 import User from "@assets/svg/User.svg";
 import DownArrow from "@assets/svg/DownArrow.svg";
 import NavButton from "../Buttons/NavButton";
+import { useAppSelector } from "@store/hooks";
 
 function Header() {
   const [display, setDisplay] = useState(true);
@@ -10,6 +11,7 @@ function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
   const headerRef = useRef(null);
+  const { totalItems } = useAppSelector((state) => state.cart);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,11 +102,18 @@ function Header() {
           </div>
           <div className="flex items-center">
             <NavButton to="/cart" className="my-custom-class">
-              <img
-                src={Basket}
-                alt="Basket Icon"
-                className="w-[25px] mr-4 md:mx-6"
-              />
+              <div className="relative w-fit">
+                {totalItems > 0 && (
+                  <div className="text-[10px] font-semibold w-[20px] h-[20px] p-1 flex justify-center items-center rounded-full text-white bg-black absolute top-[-6px] left-4">
+                    {totalItems}
+                  </div>
+                )}
+                <img
+                  src={Basket}
+                  alt="Basket Icon"
+                  className="w-[25px] mr-4 md:mx-6"
+                />
+              </div>
             </NavButton>
             <img src={User} alt="User Icon" className="w-[25px]" />
           </div>

@@ -1,16 +1,18 @@
+import { TProduct } from "@types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { actFilterProducts } from "@store/products/productsSlice";
+import { addToCart } from "@store/cart/cartSlice";
 
 const useProductDetails = () => {
   const dispatch = useAppDispatch();
   const { productId } = useParams<{ productId: string }>();
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [isStockZero, setIsStockZero] = useState(false);
   const [activeImage, setActiveImage] = useState<string | null>(null);
 
-  const product = useAppSelector((state) =>
+  const product: TProduct | undefined = useAppSelector((state) =>
     state.products.records.find(
       (product) => product.id == parseInt(productId as string)
     )
@@ -18,20 +20,25 @@ const useProductDetails = () => {
 
   const sameProduct = useAppSelector((state) => state.products.sameProduct);
   const { loading } = useAppSelector((state) => state.products);
+  const { cartItems } = useAppSelector((state) => state.cart);
+
+  const inCart = cartItems.find(
+    (item) => item.productId === product?.id
+  )?.quantity;
 
   useEffect(() => {
     dispatch(actFilterProducts({ productId }));
     return () => {
-      setCount(1);
+      setCount(0);
     };
   }, [productId, dispatch]);
 
   useEffect(() => {
-    if (product && product.attributes.stock - count === 0) {
+    if (product && product.attributes.stock - count - (inCart || 0) === 0) {
       setIsStockZero(true);
       setTimeout(() => setIsStockZero(false), 300); // Reset after animation
     }
-  }, [count, product]);
+  }, [count, product, inCart]);
 
   useEffect(() => {
     if (product && product.attributes.cover?.data?.attributes?.url) {
@@ -48,17 +55,32 @@ const useProductDetails = () => {
   }, [dispatch, product?.attributes.category.data?.attributes.title]);
 
   const increment = () => {
-    if (product && count < product.attributes.stock) {
+    if (product && count + (inCart || 0) < product.attributes.stock) {
       setCount(count + 1);
-    } else if (product && product.attributes.stock - count === 0) {
+    } else if (
+      product &&
+      product.attributes.stock - count - (inCart || 0) === 0
+    ) {
       setIsStockZero(true);
       setTimeout(() => setIsStockZero(false), 600); // Trigger animation
     }
   };
 
   const decrement = () => {
-    if (count > 1) {
+    if (count >= 1) {
       setCount(count - 1);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (product) {
+      const cartItem = {
+        productId: product.id,
+        quantity: count,
+        product: product,
+      };
+      dispatch(addToCart(cartItem));
+      setCount(0);
     }
   };
 
@@ -73,8 +95,11 @@ const useProductDetails = () => {
     count,
     isStockZero,
     activeImage,
+    cartItems,
+    inCart,
     increment,
     decrement,
+    handleAddToCart,
     handleImageClick,
   };
 };
