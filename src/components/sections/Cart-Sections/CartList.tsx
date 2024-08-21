@@ -22,7 +22,10 @@ function CartList() {
               <span className="pl-1 capitalize">
                 {item.product.attributes.color.data.attributes.title}
               </span>
-              <p className="pt-3 font-semibold text-[20px]">
+              <br />
+              <p className="font-semibold inline-block mb-2">Size : </p>
+              <span className="pl-1 capitalize">{item.size}</span>
+              <p className="font-semibold text-[20px]">
                 {item.product.attributes.price}$
               </p>
             </div>

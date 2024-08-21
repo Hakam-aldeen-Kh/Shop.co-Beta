@@ -9,8 +9,10 @@ const useProductDetails = () => {
   const dispatch = useAppDispatch();
   const { productId } = useParams<{ productId: string }>();
   const [count, setCount] = useState(0);
+  const [sizeCheck, setSizeCheck] = useState(false);
   const [isStockZero, setIsStockZero] = useState(false);
   const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [activeSize, setActiveSize] = useState<string | null>(null);
 
   const product: TProduct | undefined = useAppSelector((state) =>
     state.products.records.find(
@@ -77,11 +79,19 @@ const useProductDetails = () => {
       const cartItem = {
         productId: product.id,
         quantity: count,
+        size: activeSize,
         product: product,
       };
       dispatch(addToCart(cartItem));
       setCount(0);
+      setSizeCheck(false);
+      setActiveSize(null);
     }
+  };
+
+  const handleChoseSize = (sizeTitle: string) => {
+    setActiveSize(sizeTitle);
+    setSizeCheck(true);
   };
 
   const handleImageClick = (url: string) => {
@@ -97,10 +107,13 @@ const useProductDetails = () => {
     activeImage,
     cartItems,
     inCart,
+    activeSize,
+    sizeCheck,
     increment,
     decrement,
     handleAddToCart,
     handleImageClick,
+    handleChoseSize,
   };
 };
 

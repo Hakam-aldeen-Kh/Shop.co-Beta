@@ -13,10 +13,13 @@ function ProductDetails() {
     isStockZero,
     activeImage,
     inCart,
+    activeSize,
+    sizeCheck,
     decrement,
     increment,
     handleAddToCart,
     handleImageClick,
+    handleChoseSize,
   } = useProductDetails();
 
   const calcPrice = useCalcPrice;
@@ -128,7 +131,12 @@ function ProductDetails() {
             {sizes.data.map((size) => (
               <div
                 key={size.id}
-                className="py-2 px-4 rounded-full text-sm bg-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer w-fit ml-2 first:ml-0"
+                className={`py-2 px-4 rounded-full text-sm bg-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer w-fit ml-2 first:ml-0 ${
+                  activeSize === size.attributes.title && sizeCheck
+                    ? "bg-gray-900 text-white"
+                    : null
+                }`}
+                onClick={() => handleChoseSize(size.attributes.title)}
               >
                 {size.attributes.title}
               </div>
@@ -157,10 +165,11 @@ function ProductDetails() {
               onClick={handleAddToCart}
               className="ml-3 bg-black text-white py-4 rounded-full w-[55%]"
               disabled={
-                // 7 - ( 7 > 1 ? 7
                 count -
                   ((inCart || 0) > 1 && inCart === 1 ? inCart || 0 : 0) ===
-                  0 || stock - count - (inCart || 0) === 0
+                  0 ||
+                stock - count - (inCart || 0) === 0 ||
+                sizeCheck === false
               }
             >
               <i className="fa-solid fa-cart-plus mr-3"></i>
