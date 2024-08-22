@@ -2,12 +2,19 @@ import useCart from "@hooks/useCart";
 import Recycle from "@assets/svg/Recycle.svg";
 
 function CartList() {
-  const { cartItems, handleDecrement, handleIncrement, handleRemove } =
-    useCart();
+  const {
+    cartItems,
+    handleDecrement,
+    handleIncrement,
+    handleRemove,
+    calculateRemainingStock,
+  } = useCart();
+
   return (
     <div className="w-full h-fit md:w-[60%] border border-gray-300 rounded-[17px] py-2 px-5">
       {cartItems.map((item, index) => (
-        <div key={item.product.id}>
+        <div key={item.product.id + item.size}>
+          {" "}
           <div className="flex w-full my-3">
             <img
               src={`http://localhost:1337${item.product.attributes.cover.data.attributes.url}`}
@@ -44,15 +51,21 @@ function CartList() {
                   <i className="fa-solid fa-minus"></i>
                 </button>
                 <span className="py-2 px-4 bg-gray-300 flex items-center justify-center">
-                  {item.quantity}
+                  {item.quantity}{" "}
                 </span>
                 <button
                   onClick={() => handleIncrement(item)}
                   className="py-2 px-4 bg-gray-300 rounded-tr-full rounded-br-full"
-                  disabled={item.quantity === item.product.attributes.stock}
+                  disabled={
+                    item.quantity === item.product.attributes.stock ||
+                    calculateRemainingStock(item) <= 0
+                  }
                 >
                   <i className="fa-solid fa-plus"></i>
                 </button>
+              </div>
+              <div className="mt-2 text-sm text-red-600 text-center font-semibold">
+                Remaining stock: {calculateRemainingStock(item)}
               </div>
             </div>
           </div>

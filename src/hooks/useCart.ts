@@ -13,6 +13,14 @@ const useCart = () => {
     (state) => state.cart
   );
 
+  const calculateRemainingStock = (item: TCartItem) => {
+    const totalQuantityForProduct = cartItems
+      .filter((cartItem) => cartItem.product.id === item.product.id)
+      .reduce((total, cartItem) => total + cartItem.quantity, 0);
+
+    return item.product.attributes.stock - totalQuantityForProduct;
+  };
+
   const handleDecrement = (item: TCartItem) => {
     dispatch(decrementQuantity(item));
   };
@@ -36,6 +44,7 @@ const useCart = () => {
     handleDecrement,
     handleIncrement,
     handleRemove,
+    calculateRemainingStock,
   };
 };
 

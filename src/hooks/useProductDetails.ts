@@ -24,9 +24,9 @@ const useProductDetails = () => {
   const { loading } = useAppSelector((state) => state.products);
   const { cartItems } = useAppSelector((state) => state.cart);
 
-  const inCart = cartItems.find(
-    (item) => item.productId === product?.id
-  )?.quantity;
+  const inCart = cartItems
+    .filter((item) => item.productId === product?.id)
+    .reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {
     dispatch(actFilterProducts({ productId }));
@@ -36,7 +36,7 @@ const useProductDetails = () => {
   }, [productId, dispatch]);
 
   useEffect(() => {
-    if (product && product.attributes.stock - count - (inCart || 0) === 0) {
+    if (product && product.attributes.stock - count - inCart === 0) {
       setIsStockZero(true);
       setTimeout(() => setIsStockZero(false), 300); // Reset after animation
     }
@@ -57,12 +57,9 @@ const useProductDetails = () => {
   }, [dispatch, product?.attributes.category.data?.attributes.title]);
 
   const increment = () => {
-    if (product && count + (inCart || 0) < product.attributes.stock) {
+    if (product && count + inCart < product.attributes.stock) {
       setCount(count + 1);
-    } else if (
-      product &&
-      product.attributes.stock - count - (inCart || 0) === 0
-    ) {
+    } else if (product && product.attributes.stock - count - inCart === 0) {
       setIsStockZero(true);
       setTimeout(() => setIsStockZero(false), 600); // Trigger animation
     }

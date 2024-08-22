@@ -44,6 +44,12 @@ function ProductDetails() {
     images,
   } = product.attributes;
 
+  // Calculate the total quantity in the cart for the current product
+  const totalQuantityInCart = (inCart || 0) + count;
+
+  // Calculate the remaining stock after considering the current count and in-cart quantity
+  const remainingStock = stock - totalQuantityInCart;
+
   return (
     <div>
       <Breadcrumbs title="Shop" product={title} />
@@ -98,17 +104,14 @@ function ProductDetails() {
           <div className="flex items-center justify-between w-[50%]">
             <div
               className={`text-base inline-block pl-2 ${
-                stock - count - (inCart || 0) === 0
-                  ? "text-red-900"
-                  : "text-black"
+                remainingStock === 0 ? "text-red-900" : "text-black"
               } ${
                 isStockZero
                   ? "transform scale-125 transition-transform duration-300"
                   : ""
               }`}
             >
-              <i className="fa-solid fa-box-archive"></i>{" "}
-              {stock - count - (inCart || 0)}
+              <i className="fa-solid fa-box-archive"></i> {remainingStock}
             </div>
             <div className="flex items-center">
               <div
@@ -164,13 +167,7 @@ function ProductDetails() {
             <Button
               onClick={handleAddToCart}
               className="ml-3 bg-black text-white py-4 rounded-full w-[55%]"
-              disabled={
-                count -
-                  ((inCart || 0) > 1 && inCart === 1 ? inCart || 0 : 0) ===
-                  0 ||
-                stock - count - (inCart || 0) === 0 ||
-                sizeCheck === false
-              }
+              disabled={count <= 0 || sizeCheck === false}
             >
               <i className="fa-solid fa-cart-plus mr-3"></i>
               Add To Cart
