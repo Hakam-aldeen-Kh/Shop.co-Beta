@@ -21,7 +21,10 @@ function Products({ categoryController }: ProductsProps) {
           <LottieHandler type="Error" message={error} />
         </div>
       ) : allProducts.length === 0 ? (
-        "No Products"
+        <LottieHandler
+          type="notFound"
+          message="No results found for your selected filters. Please try adjusting your filters or searching with different criteria."
+        />
       ) : (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-2 gap-6 w-full md:pl-6 top-0">
           {allProducts.slice(start, end).map((product: TProduct) => (
