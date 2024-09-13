@@ -5,13 +5,18 @@ type ReviewProps = {
   name: string;
   review: string;
   rating: number;
+  isActive: boolean;
 };
 
-function Review({ id, name, review, rating }: ReviewProps) {
+function Review({ id, name, review, rating, isActive }: ReviewProps) {
   return (
     <div
       key={id}
-      className="text-black border-black border-opacity-20 border-[1px] w-full lg:min-w-[30%] min-h-[260px] py-[20px] px-[30px] rounded-[20px]"
+      className={`border-black border-opacity-20 border-[1px] w-full lg:min-w-[30%] min-h-[260px] py-[20px] px-[30px] rounded-[20px] transition-all duration-300 ${
+        isActive
+          ? "md:bg-black md:text-white md:scale-110"
+          : "bg-white text-black"
+      }`}
     >
       <Rating value={rating} readonly />
       <div className="flex gap-x-2 items-center">

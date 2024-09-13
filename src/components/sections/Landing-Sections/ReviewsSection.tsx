@@ -3,12 +3,16 @@ import LottieHandler from "@components/Feedback/Lottie/LottieHandler";
 import ReviewSkeleton from "@components/Feedback/Skeleton/ReviewSkeleton/ReviewSkeleton";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 import { useReviews } from "@hooks/index";
+import { useState } from "react";
 
 function ReviewsSection() {
   const { loading, records, error, swiperRef } = useReviews();
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <section className="my-16 w-full font-ubuntu relative">
       <div className="container flex w-full justify-between">
@@ -34,11 +38,19 @@ function ReviewsSection() {
         ) : (
           <>
             <Swiper
+              className="h-[300px] flex items-center"
               loop
               centeredSlides
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+              }}
+              modules={[Autoplay]}
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
+                setActiveIndex(swiper.realIndex);
               }}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
               breakpoints={{
                 576: {
                   slidesPerView: 1,
@@ -51,13 +63,17 @@ function ReviewsSection() {
                 },
               }}
             >
-              {records.map((review) => (
+              {records.map((review, idx) => (
                 <SwiperSlide
                   key={review.id}
-                  className="relative flex justify-center h-full"
+                  className="relative flex justify-center h-full md:pt-5"
                 >
-                  <div className="max-w-[90%] md:max-w-[95%] mx-auto transition-transform duration-300 ease-in-out">
-                    <Review {...review} {...review.attributes} />
+                  <div className="max-w-[90%] md:max-w-[95%] mx-auto transition-transform duration-300 ease-in-out scale-95">
+                    <Review
+                      isActive={activeIndex === idx}
+                      {...review}
+                      {...review.attributes}
+                    />
                   </div>
                 </SwiperSlide>
               ))}
