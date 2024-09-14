@@ -48,22 +48,22 @@ function CartList() {
               className="w-[20px] self-end hover:cursor-pointer absolute right-0 top-0"
               onClick={() => handleRemove(item)}
             />
-            <div className="mt-10 text-xs text-red-600 text-center md:ml-6  font-semibold absolute right-6 top-9 ">
+            <div className="py-2 p-3 w-[120px] mt-5 text-center text-xs  text-red-500 bg-red-100  rounded-full font-semibold absolute right-0 top-9 ">
               In stock: {calculateRemainingStock(item)}
             </div>
-            <div className="flex self-end  absolute right-0 bottom-1">
+            <div className="flex mx-auto w-full max-w-[120px]  absolute right-0 bottom-1">
               <button
                 onClick={() => handleDecrement(item)}
-                className="py-1 px-3 bg-gray-300 rounded-tl-full rounded-bl-full"
+                className="py-1 px-3 w-[40px] bg-gray-300 rounded-tl-full rounded-bl-full"
               >
                 <i className="fa-solid fa-minus"></i>
               </button>
-              <span className="py-1 px-3 bg-gray-300 flex items-center justify-center">
+              <span className="py-1 px-3 w-[40px] bg-gray-300  flex items-center justify-center">
                 {item.quantity}{" "}
               </span>
               <button
                 onClick={() => handleIncrement(item)}
-                className={`py-1 px-3 bg-gray-300 rounded-tr-full rounded-br-full ${
+                className={`py-1 px-3 w-[40px] bg-gray-300  rounded-tr-full rounded-br-full ${
                   item.quantity === item.product.attributes.stock
                     ? "opacity-50"
                     : ""

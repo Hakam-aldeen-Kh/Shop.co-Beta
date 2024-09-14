@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Basket from "@assets/svg/Basket.svg";
 import User from "@assets/svg/User.svg";
-import DownArrow from "@assets/svg/DownArrow.svg";
 import NavButton from "../Buttons/NavButton";
 import { useAppSelector } from "@store/hooks";
 
@@ -71,10 +70,11 @@ function Header() {
             display ? "top-16" : "top-10"
           } z-30 flex-col md:flex-row md:flex items-center w-full md:w-[40%] lg:w-[30%] font-[ubuntu] absolute md:relative bg-black md:bg-transparent text-white md:text-black md:top-auto left-0 md:left-auto mt-5 md:mt-0`}
         >
-          <li className="flex justify-center py-2 border-b-2 border-gray-50 w-full md:border-none">
-            Shop
-            <img src={DownArrow} alt="" className="ml-1" />
-          </li>
+            <li className="flex justify-center py-2 border-b-2 border-gray-50 w-full md:border-none">
+          <NavButton to="/shop" className="my-custom-class">
+              Shop
+          </NavButton>
+            </li>
           <li className="py-2 border-b-2 border-gray-50 w-full text-center md:border-none">
             Contact Us
           </li>

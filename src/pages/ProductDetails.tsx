@@ -134,7 +134,7 @@ function ProductDetails() {
             {sizes.data.map((size) => (
               <div
                 key={size.id}
-                className={`py-2 px-4 rounded-full text-sm bg-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer w-fit ml-2 first:ml-0 ${
+                className={`py-2 px-4 rounded-full text-nowrap text-[13px] bg-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer w-fit ml-2 first:ml-0 ${
                   activeSize === size.attributes.title && sizeCheck
                     ? "bg-gray-900 text-white"
                     : null
@@ -150,7 +150,10 @@ function ProductDetails() {
             <div className="w-[35%] flex">
               <button
                 onClick={decrement}
-                className="py-2 px-4 bg-gray-300 rounded-tl-full rounded-bl-full"
+                className={`py-2 px-4 bg-gray-300 rounded-tl-full rounded-bl-full ${
+                  count ===0 ? "opacity-50" : ""
+                }`}
+                disabled={count === 0}
               >
                 <i className="fa-solid fa-minus"></i>
               </button>
@@ -159,7 +162,10 @@ function ProductDetails() {
               </span>
               <button
                 onClick={increment}
-                className="py-2 px-4 bg-gray-300 rounded-tr-full rounded-br-full"
+                className={`py-2 px-4 bg-gray-300 rounded-tr-full rounded-br-full ${
+                  remainingStock === 0 ? "opacity-50" : ""
+                }`}
+                disabled={remainingStock === 0}
               >
                 <i className="fa-solid fa-plus"></i>
               </button>
