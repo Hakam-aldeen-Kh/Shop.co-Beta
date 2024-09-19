@@ -7,7 +7,7 @@ import { useAppSelector } from "@store/hooks";
 function Header() {
   const [display, setDisplay] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  // const [searchOpen, setSearchOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
   const headerRef = useRef(null);
   const { totalItems } = useAppSelector((state) => state.cart);
@@ -34,7 +34,7 @@ function Header() {
         hasShadow ? "shadow-md" : ""
       }`}
     >
-      {display && (
+      {/* {display && (
         <div className="bg-black text-white text-center text-xs font-[cairo] font-normal py-[5px] relative flex items-center">
           <div className="w-full container">
             Sign up and get 20% off to your first order.{" "}
@@ -47,7 +47,7 @@ function Header() {
             }}
           ></i>
         </div>
-      )}
+      )} */}
       <div className="container py-5 flex items-center justify-between">
         <div className="flex items-center">
           <div className="md:hidden mr-4">
@@ -57,7 +57,7 @@ function Header() {
               } text-xl`}
               onClick={() => {
                 setMenuOpen(!menuOpen);
-                setSearchOpen(false);
+                // setSearchOpen(false);
               }}
             ></i>
           </div>
@@ -75,23 +75,23 @@ function Header() {
               Shop
           </NavButton>
             </li>
-          <li className="py-2 border-b-2 border-gray-50 w-full text-center md:border-none">
+          <li className="py-2 border-b-2 border-gray-50 w-full text-center md:border-none opacity-50">
             Contact Us
           </li>
-          <li className="py-2 border-b-2 border-gray-50 w-full text-center md:border-none">
+          <li className="py-2 border-b-2 border-gray-50 w-full text-center md:border-none opacity-50">
             Wishlist
           </li>
         </ul>
-        <div className="relative text-gray-500 hidden md:block w-[40%]">
+        {/* <div className="relative text-gray-500 hidden md:block w-[40%]">
           <i className="fa-solid fa-magnifying-glass absolute top-[50%] translate-y-[-50%] left-3 text-lg"></i>
           <input
             type="text"
             placeholder="Type to search"
             className="outline-none bg-[#F0F0F0] border-2 rounded-[50px] text-sm py-2 px-10 w-full font-[ubuntu] font-normal font-400"
           />
-        </div>
+        </div> */}
         <div className="flex items-center">
-          <div className="flex md:hidden items-center">
+          {/* <div className="flex md:hidden items-center">
             <i
               className="fa-solid fa-magnifying-glass text-xl mr-4"
               onClick={() => {
@@ -99,7 +99,7 @@ function Header() {
                 setMenuOpen(false);
               }}
             ></i>
-          </div>
+          </div> */}
           <div className="flex items-center">
             <NavButton to="/cart" className="my-custom-class">
               <div className="relative w-fit">
@@ -115,11 +115,11 @@ function Header() {
                 />
               </div>
             </NavButton>
-            <img src={User} alt="User Icon" className="w-[25px]" />
+            {/* <img src={User} alt="User Icon" className="w-[25px]" /> */}
           </div>
         </div>
       </div>
-      {searchOpen && (
+      {/* {searchOpen && (
         <div
           className={`${
             display ? "top-18" : "top-16"
@@ -131,7 +131,7 @@ function Header() {
             className="outline-none bg-[#F0F0F0] border-2 rounded-[50px] text-sm py-2 px-10 w-full font-[ubuntu] font-normal font-400"
           />
         </div>
-      )}
+      )} */}
     </section>
   );
 }
