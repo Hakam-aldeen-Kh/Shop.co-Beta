@@ -43,8 +43,13 @@ const useProductDetails = () => {
   }, [count, product, inCart]);
 
   useEffect(() => {
-    if (product && product.attributes.cover?.data?.attributes?.url) {
-      setActiveImage(product.attributes.cover.data.attributes.url);
+    if (
+      product &&
+      product.attributes.cover?.data?.attributes?.formats.thumbnail.url
+    ) {
+      setActiveImage(
+        product.attributes.cover.data.attributes.formats.medium.url
+      );
     }
   }, [product]);
 

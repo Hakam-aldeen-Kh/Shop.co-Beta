@@ -17,7 +17,10 @@ function CartList() {
           {" "}
           <div className="flex w-full my-3 relative">
             <img
-              src={`http://localhost:1337${item.product.attributes.cover.data.attributes.url}`}
+              src={
+                item.product.attributes.cover.data.attributes.formats.thumbnail
+                  .url
+              }
               alt={item.product.attributes.title}
               className="w-[125px] h-[135px] rounded-[15px]"
             />

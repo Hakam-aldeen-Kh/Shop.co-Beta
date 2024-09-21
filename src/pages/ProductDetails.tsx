@@ -57,7 +57,7 @@ function ProductDetails() {
       <div className="container flex items-start flex-wrap md:justify-between">
         <div className="w-full md:max-w-[50%] flex flex-wrap lg:flex-nowrap flex-row-reverse">
           <img
-            src={`http://localhost:1337${activeImage}`}
+            src={activeImage as string}
             alt={title}
             className="w-full lg:w-[70%] rounded-[15px]"
           />
@@ -65,14 +65,16 @@ function ProductDetails() {
             {images.data.map((image) => (
               <img
                 key={image.id}
-                src={`http://localhost:1337${image.attributes.url}`}
+                src={image.attributes.formats.medium.url}
                 alt={title}
                 className={`w-[30%] lg:w-[200px] max-h-[150px] rounded-[15px] lg:mt-4 lg:first-of-type:mt-0 cursor-pointer ${
-                  activeImage === image.attributes.url
+                  activeImage === image.attributes.formats.medium.url
                     ? "border-2 border-black"
                     : ""
                 }`}
-                onClick={() => handleImageClick(image.attributes.url)}
+                onClick={() =>
+                  handleImageClick(image.attributes.formats.medium.url)
+                }
               />
             ))}
           </div>
@@ -151,7 +153,7 @@ function ProductDetails() {
               <button
                 onClick={decrement}
                 className={`py-2 px-4 bg-gray-300 rounded-tl-full rounded-bl-full ${
-                  count ===0 ? "opacity-50" : ""
+                  count === 0 ? "opacity-50" : ""
                 }`}
                 disabled={count === 0}
               >

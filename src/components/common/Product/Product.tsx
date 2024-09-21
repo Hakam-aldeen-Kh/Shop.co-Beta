@@ -10,7 +10,7 @@ interface ProductItemProps {
 function Product({ product, calcPrice }: ProductItemProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const coverUrl = product.attributes.cover.data.attributes.url;
+  const coverUrl = product.attributes.cover.data.attributes.formats.medium.url;
 
   const handleOnClick = () => {
     const currentPath = location.pathname;
@@ -44,7 +44,7 @@ function Product({ product, calcPrice }: ProductItemProps) {
           <i className=" text-base pl-2 fa-solid fa-up-right-from-square"></i>
         </div>
         <img
-          src={`http://localhost:1337${coverUrl}`}
+          src={coverUrl}
           alt={product.attributes.title}
           className="w-full object-cover h-full"
         />
