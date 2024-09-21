@@ -10,11 +10,11 @@ interface ProductItemProps {
 function Product({ product, calcPrice }: ProductItemProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const coverUrl = product.attributes.cover.data.attributes.formats.medium.url;
+  const coverUrl =  product?.attributes?.cover?.data?.attributes?.formats?.thumbnail?.url;
+
 
   const handleOnClick = () => {
     const currentPath = location.pathname;
-    console.log("Current Path", currentPath);
     let newPath;
 
     if (currentPath.includes("/product")) {

@@ -48,7 +48,7 @@ const useProductDetails = () => {
       product.attributes.cover?.data?.attributes?.formats.thumbnail.url
     ) {
       setActiveImage(
-        product.attributes.cover.data.attributes.formats.medium.url
+        product.attributes.cover.data.attributes.formats.thumbnail.url
       );
     }
   }, [product]);

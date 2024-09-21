@@ -65,15 +65,15 @@ function ProductDetails() {
             {images.data.map((image) => (
               <img
                 key={image.id}
-                src={image.attributes.formats.medium.url}
+                src={image.attributes.formats.thumbnail.url}
                 alt={title}
                 className={`w-[30%] lg:w-[200px] max-h-[150px] rounded-[15px] lg:mt-4 lg:first-of-type:mt-0 cursor-pointer ${
-                  activeImage === image.attributes.formats.medium.url
+                  activeImage === image.attributes.formats.thumbnail.url
                     ? "border-2 border-black"
                     : ""
                 }`}
                 onClick={() =>
-                  handleImageClick(image.attributes.formats.medium.url)
+                  handleImageClick(image.attributes.formats.thumbnail.url)
                 }
               />
             ))}
