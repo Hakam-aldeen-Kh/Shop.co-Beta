@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import Basket from "@assets/svg/Basket.svg";
-import User from "@assets/svg/User.svg";
 import NavButton from "../Buttons/NavButton";
 import { useAppSelector } from "@store/hooks";
 
 function Header() {
-  const [display, setDisplay] = useState(true);
+  const [display] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   // const [searchOpen, setSearchOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
